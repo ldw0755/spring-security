@@ -5,6 +5,9 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security.xsd">
 	
+	<!-- 패스워드 인코더 -->
+	<bean id="bcryptPasswordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder"/>
+	
 	<!-- 로그인 생성 시 동작하는 핸들러 객체 생성 -->
 	<bean id="customLoginSuccessHandler" class="com.company.handler.CustomLoginSuccessHandler"/>
 	
@@ -34,10 +37,22 @@
 	<!-- 인증을 어떤 방식으로 할 것인지 기록 -->
 	<security:authentication-manager>
 		<security:authentication-provider>
-			<security:user-service><!-- user인증을 in-memory방식으로 진행 -->
+			<!-- <security:user-service>user인증을 in-memory방식으로 진행(연습용)
 				<security:user name="member" password="{noop}member" authorities="ROLE_MEMBER"/>
 				<security:user name="admin" password="{noop}admin" authorities="ROLE_MEMBER,ROLE_ADMIN"/>
-			</security:user-service>
+			</security:user-service> -->
+			<!-- users에 담을 수 있는 값 : userid, userpw, enabled -->
+			<!-- 
+			회원 관리
+			등급들 : 
+			ROLE_MEMBER => user0~79
+			ROLE_MANAGER => manager80~89
+			ROLE_ADMIN => admin90~99
+			 -->
+			<security:jdbc-user-service
+			data-source-ref="ds" users-by-username-query="select userid, userpw, enabled from spring_member where userid=?"
+			authorities-by-username-query="select * from spring_member_auth where userid=?"/>
+			<security:password-encoder ref="bcryptPasswordEncoder"/>
 		</security:authentication-provider>
 	</security:authentication-manager>
 </beans>

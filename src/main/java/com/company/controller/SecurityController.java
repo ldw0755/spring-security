@@ -29,7 +29,7 @@ public class SecurityController {
 	
 	@GetMapping("/login")
 	public void loginForm(String error, Model model, String logout) {
-		log.info("로그인 폼 요청 : ");
+		log.info("로그인 폼 요청 : "+error);
 		if(error!=null) {
 			model.addAttribute("error", "로그인 정보를 확인해 주세요.");
 		}
