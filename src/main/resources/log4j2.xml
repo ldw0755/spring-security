@@ -19,6 +19,7 @@
 		<logger name="com.company.controller" level="debug" />
 		<logger name="com.company.service" level="debug" />
 		<logger name="com.company.mapper" level="debug" />
+		<logger name="com.company.handler" level="debug" />
 		<!-- 스프링 프레임워크 로깅처리 -->
 		<logger name="org.springframework.core" level="info" />
 		<logger name="org.springframework.beans" level="info" />

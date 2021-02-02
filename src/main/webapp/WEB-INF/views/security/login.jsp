@@ -19,6 +19,7 @@
       <input type="password" id="inputPassword" name="password" class="form-control" placeholder="비밀번호" required>
       <div class="checkbox mb-3">
         <label>
+        	<!-- spring-security의 remember-me 사용 위해 name 속성은 반드시 "remember-me" 로 설정한다. -->
           <input type="checkbox" name="remember-me"> Remember me
         </label>
       </div>    

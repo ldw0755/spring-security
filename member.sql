@@ -19,3 +19,15 @@ select * from spring_member;
 
 select * from spring_member where userid='admin90';
 select * from spring_member_auth where userid='admin90';
+
+--admin 90 ROLE_MEMBER 권한 추가
+insert into spring_member_auth values('admin90', 'ROLE_MEMBER');
+
+--스프링 시큐리티에서 remember me를 위해 "기본적으로" 구현하는 테이블
+---정해진 형식
+create table persistent_logins(
+	username varchar2(64) not null,
+	series varchar2(64) primary key,
+	token varchar2(64) not null,
+	last_used timestamp not null
+);
